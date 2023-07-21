@@ -1,0 +1,15 @@
+{
+	"workbench.editor.wrapTabs": true,
+	"editor.tabSize": 4,
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"explorer.confirmDelete": false,
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+	"javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+	"javascript.format.placeOpenBraceOnNewLineForFunctions": false,
+	"typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+	"typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+	"typescript.format.placeOpenBraceOnNewLineForFunctions": false,
+	"diffEditor.wordWrap": "off"
+}

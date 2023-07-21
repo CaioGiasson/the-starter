@@ -1,0 +1,14 @@
+POST http://localhost:8000/invoices HTTP/1.1
+Content-Type: application/json
+
+{
+	"customer" : {
+		"name": "Fulano de Tal",
+		"email" : "fulano@mail.com"
+	},
+	"product" : {
+		"sku" : "xpto1234",
+		"name" : "Product XPTO",
+		"price" : 12.34
+	}
+}

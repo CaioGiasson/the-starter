@@ -1,0 +1,55 @@
+{
+	"name": "the-starter",
+	"version": "0.9.9",
+	"description": "Serviço de checkout The Starter",
+	"main": "index.ts",
+	"scripts": {
+		"test": "test",
+		"dev": "npx prisma generate && npx nodemon",
+		"build": "rimraf ./build && tsc",
+		"check": "prettier --write . && eslint . --ext .ts",
+		"start": "npm run build && node build/index.js",
+		"prepare": "husky install"
+	},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"keywords": [
+		"the-starter",
+		"checkout",
+		"wepayments"
+	],
+	"author": "Caio Felipe Giasson",
+	"license": "ISC",
+	"bugs": {
+		"url": ""
+	},
+	"homepage": "",
+	"devDependencies": {
+		"@types/express": "^4.17.17",
+		"@types/node": "^18.16.19",
+		"@typescript-eslint/eslint-plugin": "^5.52.0",
+		"@typescript-eslint/parser": "^5.52.0",
+		"eslint": "^8.34.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.1.2",
+		"nodemon": "^2.0.20",
+		"prettier": "2.8.4",
+		"prisma": "^4.10.1",
+		"rimraf": "^4.1.2",
+		"ts-node": "^10.9.1",
+		"typescript": "^4.9.5"
+	},
+	"lint-staged": {
+		"**/*": "prettier --write --ignore-unknown"
+	},
+	"dependencies": {
+		"@prisma/client": "^4.10.1",
+		"@types/node-fetch": "^2.6.2",
+		"crypto": "^1.0.1",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"fs": "^0.0.1-security"
+	}
+}

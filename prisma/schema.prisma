@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type Customer {
+  name  String
+  email String
+}
+
+type Product {
+  sku   String
+  name  String
+  price Float
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  PIX
+}
+
+type PaymentData {
+  amount Float
+  method PaymentMethod
+  requestedAt DateTime
+  auth   String?
+  doc    String?
+  paidAt DateTime?
+}
+
+model Invoice {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  customer    Customer
+  product     Product
+  createdAt   DateTime     @default(now())
+  paymentData PaymentData?
+}
