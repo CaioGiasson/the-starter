@@ -1,7 +1,10 @@
-PATCH http://localhost:8000/invoices/xpto1234 HTTP/1.1
+PATCH http://localhost:8000/invoices/64b9fe19f0b168c600da7af0 HTTP/1.1
 Content-Type: application/json
 
 {
-	"creditCardHash" : "xpto1234", // Obrigatório se pix for false
-	"pix": false	// Opcional, se não for enviado também é interpretado como false
+	"creditCardHash" : "xpto1234", 
+	"pix": false	
 }
+
+// creditCardHash é Obrigatório somente se não for pix
+// pix é Opcional, se não for enviado também é interpretado como false

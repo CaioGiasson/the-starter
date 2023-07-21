@@ -23,13 +23,16 @@ enum PaymentMethod {
   PIX
 }
 
-type PaymentData {
-  amount Float
-  method PaymentMethod
+type ChargeData {
+  amount      Float
+  method      PaymentMethod
   requestedAt DateTime
-  auth   String?
-  doc    String?
-  paidAt DateTime?
+}
+
+type PaymentData {
+  aut    String
+  doc    String
+  paidAt DateTime
 }
 
 model Invoice {
@@ -37,5 +40,6 @@ model Invoice {
   customer    Customer
   product     Product
   createdAt   DateTime     @default(now())
+  chargeData  ChargeData?
   paymentData PaymentData?
 }

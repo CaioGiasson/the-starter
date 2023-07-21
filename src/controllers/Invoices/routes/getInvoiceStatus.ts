@@ -13,13 +13,15 @@ export default async function getInvoiceStatus(req: Request, res: Response): Pro
 	let result = null
 	try {
 		const invoiceId = req.params.id,
-			invoice = await InvoicesRepository.get(invoiceId),
-			isWaitingMethod = invoice.paymentData === null,
-			isRequested = invoice.paymentData !== null,
+			invoice = await InvoicesRepository.get(invoiceId)
+		if (!invoice) throw new Error(Errors.INVOICE_NOT_FOUND)
+
+		const isWaitingMethod = invoice.chargeData === null,
+			isRequested = invoice.chargeData !== null,
 			isPaid = invoice.paymentData && invoice.paymentData.paidAt !== null,
 			status = isPaid ? InvoiceStatus.PAID : isRequested ? InvoiceStatus.REQUESTED : InvoiceStatus.PENDING,
 			description = InvoiceStatusTexts[status],
-			method = isWaitingMethod ? undefined : invoice.paymentData?.method
+			method = isWaitingMethod ? undefined : invoice.chargeData?.method
 
 		result = {
 			status,
