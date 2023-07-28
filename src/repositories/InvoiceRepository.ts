@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 export type ChargeDataSimple = Omit<ChargeData, 'requestedAt'>
 export type PaymentDataSimple = Omit<PaymentData, 'paidAt'>
 
-export default class InvoicesRepository {
+export default class InvoiceRepository {
 	static async create(customer: Customer, product: Product): Promise<Invoice> {
 		try {
 			const invoice = await prisma.invoice.create({

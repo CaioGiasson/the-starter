@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import ErrorManager from '../../../managers/ErrorManager'
-import InvoicesRepository from '../../../repositories/InvoicesRepository'
+import InvoiceRepository from '../../../repositories/InvoiceRepository'
 import { Errors } from '../../../common/Errors'
 
 /**
@@ -12,7 +12,7 @@ export default async function createInvoice(req: Request, res: Response): Promis
 	let result = null
 	try {
 		const { customer, product } = req.body,
-			invoice = await InvoicesRepository.create(customer, product)
+			invoice = await InvoiceRepository.create(customer, product)
 
 		result = { invoiceId: invoice.id }
 	} catch (error: unknown) {

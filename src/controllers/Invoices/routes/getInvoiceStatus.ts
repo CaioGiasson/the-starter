@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import ErrorManager from '../../../managers/ErrorManager'
-import InvoicesRepository from '../../../repositories/InvoicesRepository'
+import InvoiceRepository from '../../../repositories/InvoiceRepository'
 import { InvoiceStatus, InvoiceStatusTexts } from '../../../common/InvoiceStatus'
 import { Errors } from '../../../common/Errors'
 
@@ -13,7 +13,7 @@ export default async function getInvoiceStatus(req: Request, res: Response): Pro
 	let result = null
 	try {
 		const invoiceId = req.params.id,
-			invoice = await InvoicesRepository.get(invoiceId)
+			invoice = await InvoiceRepository.get(invoiceId)
 		if (!invoice) throw new Error(Errors.INVOICE_NOT_FOUND)
 
 		const isWaitingMethod = invoice.chargeData === null,

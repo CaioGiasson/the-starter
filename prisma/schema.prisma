@@ -58,7 +58,8 @@ model Request {
 }
 
 model Callback {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  url  String
-  body Json
+  id     String        @id @default(auto()) @map("_id") @db.ObjectId
+  url    String
+  body   Json
+  method PaymentMethod
 }
