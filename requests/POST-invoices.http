@@ -4,7 +4,8 @@ Content-Type: application/json
 {
 	"customer" : {
 		"name": "Fulano de Tal",
-		"email" : "fulano@mail.com"
+		"email" : "fulano@mail.com",
+		"document" : "00000000191"
 	},
 	"product" : {
 		"sku" : "xpto1234",

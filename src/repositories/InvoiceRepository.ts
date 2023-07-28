@@ -1,7 +1,7 @@
 import { Errors } from '../common/Errors'
 import ErrorManager from '../managers/ErrorManager'
 
-import { PrismaClient, Invoice, Customer, Product, PaymentMethod, PaymentData, ChargeData } from '@prisma/client'
+import { PrismaClient, Invoice, Customer, Product, PaymentData, ChargeData } from '@prisma/client'
 
 const prisma = new PrismaClient()
 

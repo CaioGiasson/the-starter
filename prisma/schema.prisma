@@ -10,6 +10,7 @@ datasource db {
 type Customer {
   name  String
   email String
+  document String
 }
 
 type Product {
