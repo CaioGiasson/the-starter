@@ -4,6 +4,7 @@ import InvoicesRepository from '../../../repositories/InvoicesRepository'
 import { Errors } from '../../../common/Errors'
 import { PaymentMethod } from '@prisma/client'
 import MockData from '../../../common/MockData'
+import WePayService from '../../../services/Example/WePayService'
 
 /**
  *
@@ -22,11 +23,9 @@ export default async function chargeInvoice(req: Request, res: Response): Promis
 			isCreditCardCharge = hasCreditCardHash,
 			isPixCharge = !isCreditCardCharge
 
-		// TODO: Decodificar e validar hash do cartão de crédito
-
-		// Primeiro salva o método requisitado como credit card hash
 		let chargeResult = null
 		if (isCreditCardCharge) {
+			// Decodificar dados do cartão
 			const chargeData = { method: 'CREDIT_CARD' as PaymentMethod, amount: invoice.product.price }
 			chargeResult = await InvoicesRepository.setChargeData(invoiceId, chargeData)
 			if (!chargeResult) throw new Error(Errors.INVOICE_CHARGE_FAILED)
@@ -44,6 +43,9 @@ export default async function chargeInvoice(req: Request, res: Response): Promis
 			const chargeData = { method: 'PIX' as PaymentMethod, amount: invoice.product.price }
 			chargeResult = await InvoicesRepository.setChargeData(invoiceId, chargeData)
 			if (!chargeResult) throw new Error(Errors.INVOICE_CHARGE_FAILED)
+
+			await WePayService.createPix(invoice.product.price, invoice.id)
+
 			result = {
 				qrCode: MockData.qrCode,
 				copyPaste: MockData.pixCopyPaste,

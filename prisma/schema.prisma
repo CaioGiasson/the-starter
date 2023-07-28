@@ -43,3 +43,22 @@ model Invoice {
   chargeData  ChargeData?
   paymentData PaymentData?
 }
+
+model Request {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  url       String
+  method    String
+  createdAt DateTime @default(now())
+  body      Json?
+  headers   Json?
+
+  response  Json?
+  status    Int?
+  updatedAt DateTime?
+}
+
+model Callback {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  url  String
+  body Json
+}

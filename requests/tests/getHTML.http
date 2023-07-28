@@ -1,0 +1,2 @@
+GET https://api.sandbox.wepayout.com.br/v1/payin/html/9377205b8c67da1ac97481806a016a6efd7864110981dd44909ab01acdaf2d86 HTTP/1.1
+Authorization: Bearer 9195c34233f976442958698488ff34f96fd07a989481526d2c79af84ac77c116
