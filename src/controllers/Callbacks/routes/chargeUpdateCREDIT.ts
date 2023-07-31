@@ -17,6 +17,8 @@ export default async function chargeUpdateCREDIT(req: Request, res: Response): P
 			body = req.body,
 			method = PaymentMethod.CREDIT_CARD
 
+		console.log(`Chegou callback ${method} para ${invoiceId}`)
+
 		// Retorno antecipado para liberar o webhook
 		res.status(200).json({ success: true })
 

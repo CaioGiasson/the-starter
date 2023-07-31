@@ -17,6 +17,8 @@ export default async function chargeUpdatePIX(req: Request, res: Response): Prom
 			body = req.body,
 			method = PaymentMethod.PIX
 
+		console.log(`Chegou callback ${method} para ${invoiceId}`)
+
 		// Retorno antecipado para liberar o webhook
 		res.status(200).json({ success: true })
 

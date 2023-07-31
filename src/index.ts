@@ -17,3 +17,6 @@ app.use(express.json())
 
 import InvoicesController from './controllers/Invoices/InvoicesController'
 InvoicesController.listenForRoutes(app)
+
+import CallbacksController from './controllers/Callbacks/CallbacksController'
+CallbacksController.listenForRoutes(app)

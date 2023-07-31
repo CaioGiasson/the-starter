@@ -6,8 +6,8 @@ import chargeUpdateCREDIT from './routes/chargeUpdateCREDIT'
 
 export default class CallbacksController {
 	static routes = [
-		router.post(`/webhook/pix/:id`, chargeUpdatePIX),
-		router.post(`/webhook/credit/:id`, chargeUpdateCREDIT),
+		router.post(`/webhook/PIX/:id`, chargeUpdatePIX),
+		router.post(`/webhook/CREDIT_CARD/:id`, chargeUpdateCREDIT),
 	]
 
 	static listenForRoutes(app: Express): void {
