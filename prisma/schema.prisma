@@ -8,8 +8,8 @@ datasource db {
 }
 
 type Customer {
-  name  String
-  email String
+  name     String
+  email    String
   document String
 }
 
@@ -59,8 +59,9 @@ model Request {
 }
 
 model Callback {
-  id     String        @id @default(auto()) @map("_id") @db.ObjectId
-  url    String
-  body   Json
-  method PaymentMethod
+  id         String        @id @default(auto()) @map("_id") @db.ObjectId
+  url        String
+  body       Json
+  method     PaymentMethod
+  receivedAt DateTime
 }

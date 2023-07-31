@@ -18,6 +18,7 @@ export default class CallbackRepository {
 				data: {
 					...requestData,
 					body: requestData.body || {},
+					receivedAt: new Date(),
 				},
 			})
 
