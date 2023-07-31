@@ -12,7 +12,7 @@ type CallbackCreateArgs = {
 }
 
 export default class CallbackRepository {
-	static async create(requestData: CallbackCreateArgs): Promise<Callback> {
+	static async create(requestData: CallbackCreateArgs, status: string, invoiceId: string): Promise<Callback> {
 		try {
 			const request = await prisma.callback.create({
 				data: {

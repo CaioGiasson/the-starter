@@ -43,6 +43,7 @@ model Invoice {
   createdAt   DateTime     @default(now())
   chargeData  ChargeData?
   paymentData PaymentData?
+  callbacks Callback[]
 }
 
 model Request {
@@ -63,5 +64,9 @@ model Callback {
   url        String
   body       Json
   method     PaymentMethod
+  status  String
+  invoiceId       String   @unique @db.ObjectId
+  invoice         Invoice  @relation(fields: [invoiceId], references: [id])
+
   receivedAt DateTime
 }

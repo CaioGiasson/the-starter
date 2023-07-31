@@ -1,4 +1,4 @@
-PATCH http://localhost:8000/invoices/64c34954386fe5f89145db48 HTTP/1.1
+PATCH https://the-starter.koud.dev/invoices/64c82cbc7365f90ef27ab35d HTTP/1.1
 Content-Type: application/json
 
 {

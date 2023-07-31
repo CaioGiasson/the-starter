@@ -26,7 +26,8 @@ export default async function chargeUpdatePIX(req: Request, res: Response): Prom
 		const invoice = await InvoiceRepository.get(invoiceId)
 		if (!invoice) throw new Error(Errors.INVOICE_NOT_FOUND)
 
-		await CallbackRepository.create({ url: req.url, method, body })
+		const callbackStatus = body?.status || ''
+		await CallbackRepository.create({ url: req.url, method, body }, callbackStatus, invoiceId)
 	} catch (error: unknown) {
 		ErrorManager.log(error as Error)
 	}
