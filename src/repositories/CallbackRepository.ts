@@ -17,6 +17,8 @@ export default class CallbackRepository {
 			const request = await prisma.callback.create({
 				data: {
 					...requestData,
+					status,
+					invoiceId,
 					body: requestData.body || {},
 					receivedAt: new Date(),
 				},
