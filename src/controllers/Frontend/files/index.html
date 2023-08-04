@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>The Starter</title>
+		<link rel="icon" type="image/x-icon" href="img/favicon.png" />
+
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;400;700&display=swap" rel="stylesheet" />
+
+		<!-- THIS IS A SNAPSHOT OF THE MAIN SITE STYLES -->
+		<link href="css/site.css" rel="stylesheet" />
+
+		<!-- THOSE STYLES ARE EXCLUSIVE FOR THE CHECKOUT PAGE -->
+		<link href="css/styles.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="py-5 text-center">
+				<img class="d-block mx-auto mb-4" src="img/logo.png" alt="TheStarter" />
+				<h2>Checkout</h2>
+			</div>
+		</div>
+
+		<section id="loading">
+			<div class="container text-center py-3">
+				<div class="row">
+					<div class="col-12">
+						<div class="lds-roller">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+					</div>
+					<div class="col-12">
+						<p>Aguarde, carregando dados do produto</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="error" class="hidden">
+			<div class="container text-center">
+				<div class="row">
+					<div class="col-12">
+						<h4>Ocorreu um erro ao preparar seu pagamento</h4>
+						<p>Por favor, fale com nosso time de suporte</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="cart" class="hidden">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 order-md-2 mb-4">
+						<h4 class="d-flex justify-content-between align-items-center mb-3">
+							<span class="text-muted">Carrinho</span>
+							<span class="badge badge-secondary badge-pill">3</span>
+						</h4>
+						<ul class="list-group mb-3">
+							<li class="list-group-item d-flex justify-content-between lh-condensed">
+								<div>
+									<h6 id="prod-name" class="my-0"></h6>
+								</div>
+								<span id="prod-price" class="text-muted"></span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between">
+								<span>Total</span>
+								<strong id="prod-total-price"></strong>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-8 order-md-1 mb-3">
+						<h4 class="mb-3">Dados cadastrais</h4>
+						<form class="needs-validation" onsubmit="event.preventDefault(); doCheckout()" novalidate>
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<label for="form-name">Nome do comprador</label>
+									<input
+										type="text"
+										class="form-control"
+										id="form-name"
+										placeholder=""
+										value=""
+										required
+									/>
+									<div class="invalid-feedback">Nome do comprador é obrigatório</div>
+								</div>
+								<div class="col-md-6 mb-3">
+									<label for="form-document">CPF</label>
+									<input
+										type="text"
+										class="form-control"
+										id="form-document"
+										placeholder=""
+										value=""
+										inputmode="numeric"
+										required
+									/>
+									<div class="invalid-feedback">CPF é obrigatório</div>
+								</div>
+							</div>
+
+							<div class="mb-3">
+								<label for="email">Email</label>
+								<input
+									type="email"
+									class="form-control"
+									id="form-email"
+									placeholder="voce@seu-email.com"
+									inputmode="email"
+									required
+								/>
+								<div class="invalid-feedback">E-mail é obrigatório</div>
+							</div>
+
+							<div class="col-md-8 order-md-1 mb-3">
+								<h4 class="mb-3">Forma de Pagamento</h4>
+
+								<div class="btn-group btn-group-lg" role="group" aria-label="">
+									<button
+										data-method="PIX"
+										onclick="event.preventDefault(); setPaymentMethod(this)"
+										class="btn btn-secondary btn-lg btn-block btn-payment-method"
+									>
+										PIX
+									</button>
+									<button
+										data-method="CREDIT_CARD"
+										onclick="event.preventDefault(); setPaymentMethod(this)"
+										class="btn btn-secondary btn-lg btn-block btn-payment-method"
+									>
+										Cartão de Crédito
+									</button>
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-primary btn-lg btn-block">
+								Avançar para pagamento
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<div class="footer">
+			<div class="container w-container">
+				<div class="footer-grid">
+					<div class="footer-column">
+						<div>
+							<a
+								href="https://wa.me/message/RHJSTR3S7N5DM1"
+								target="_blank"
+								class="cta-whatsapp short w-inline-block"
+								><img
+									src="https://uploads-ssl.webflow.com/6213703635ee13a9896a5a1e/6266a90f0597666098132691_Framewhite.png"
+									loading="lazy"
+									height="20"
+									width="20"
+									alt=""
+									class="arrow-white"
+								/>
+								<div class="text-block-ebook">Fala connosco</div></a
+							>
+						</div>
+						<div class="margin-25px">
+							<a
+								href="mailto:miguel@thestarter.io?subject=Esclarecimento%20de%20D%C3%BAvidas%20-%20TheStarter"
+								class="link-secund-rio-ebook margin-xs w-inline-block"
+								><p class="ebook-texto-white link">Contactar por email</p>
+								<img
+									src="https://uploads-ssl.webflow.com/6213703635ee13a9896a5a1e/64450eed4826927979a7605f_Icon-Link-White.png"
+									loading="lazy"
+									alt=""
+									width="24"
+									class="icon-link-ebook" /></a
+							><a href="tel:+351911837836" class="link-secund-rio-ebook w-inline-block"
+								><p class="ebook-texto-white link">Ligar (telemóvel)</p>
+								<img
+									src="https://uploads-ssl.webflow.com/6213703635ee13a9896a5a1e/64450eed4826927979a7605f_Icon-Link-White.png"
+									loading="lazy"
+									alt=""
+									width="24"
+									class="icon-link-ebook"
+							/></a>
+						</div>
+						<div class="margin-25px">
+							<div class="social-media-links not-hidden left">
+								<a
+									href="https://www.linkedin.com/company/thestarterchallenges/?viewAsMember=true"
+									target="_blank"
+									class="link-social w-inline-block"
+									><img
+										src="https://uploads-ssl.webflow.com/6213703635ee13a9896a5a1e/6216210a3875f38b6d00a781_Icon%3DLinkedin.png"
+										height="48"
+										width="48"
+										alt="LinkedIn" /></a
+								><a
+									href="https://join.slack.com/t/thestarterworkspace/shared_invite/zt-1462i4wu9-QFPRjrpgY49~wx1~MSrQiA"
+									target="_blank"
+									class="link-social w-inline-block"
+									><img
+										src="https://uploads-ssl.webflow.com/6213703635ee13a9896a5a1e/6216210ab16395428edb216f_Icon%3DSlack.png"
+										loading="lazy"
+										width="48"
+										height="48"
+										alt="Slack" /></a
+								><a
+									href="https://www.instagram.com/thestarter.io/"
+									target="_blank"
+									class="link-social w-inline-block"
+									><img
+										src="https://uploads-ssl.webflow.com/6213703635ee13a9896a5a1e/6216210a247b46abad7f3f56_Icon%3DInstagram.png"
+										loading="lazy"
+										width="48"
+										height="48"
+										alt="Instagram" /></a
+								><a
+									href="https://t.me/+CvFPDaFzuPo0YjM8"
+									target="_blank"
+									class="link-social w-inline-block"
+									><img
+										src="https://uploads-ssl.webflow.com/6213703635ee13a9896a5a1e/6216210a8e75dc98903c4ad1_Icon%3DTelegram.png"
+										loading="lazy"
+										width="48"
+										height="48"
+										alt="Telegram"
+								/></a>
+							</div>
+						</div>
+					</div>
+					<div class="footer-column">
+						<div class="ebook-texto-white bold">Sobre a TheStarter</div>
+						<div class="margin-25px margin-xs">
+							<a href="/sobre-nos" class="link-footer">Sobre Nós</a
+							><a href="/trilhas-carreira-thestarter" class="link-footer">Cursos</a
+							><a href="/formacao-empresas-thestarter" class="link-footer">Empresas</a
+							><a href="/trilhas-carreira-thestarter" class="link-footer">Trilhas</a
+							><a href="/especialistas-thestarter" class="link-footer">Professores</a
+							><a href="/comunidade" class="link-footer">Comunidade</a
+							><a href="https://testimonial.to/thestarter/all" target="_blank" class="link-footer"
+								>Testemunhos</a
+							><a href="/certificacao-thestarter" class="link-footer">Certificação Internacional</a
+							><a href="/bolsas-de-estudo-thestarter" class="link-footer">Bolsas de Estudo</a>
+						</div>
+					</div>
+					<div class="footer-column">
+						<div class="ebook-texto-white bold">Cursos</div>
+						<div class="margin-25px">
+							<a href="/uxdesign/ux-design-thestarter" class="link-footer"
+								>UX/UI&nbsp;Design [Fundamentos]</a
+							><a href="/uidesign/ui-design-thestarter" class="link-footer">UI&nbsp;Design com Figma</a
+							><a href="/uxresearch/ux-research-and-strategy-thestarter" class="link-footer"
+								>UX Research &amp;&nbsp;Strategy</a
+							><a
+								href="/ux-design-nas-organizacoes-como-tomar-decisoes-e-criar-impacto-thestarter"
+								class="link-footer"
+								>UX&nbsp;Design Avançado</a
+							><a href="/uxdesign/ux-writing-na-pratica-thestarter" class="link-footer"
+								>UX&nbsp;Writing na Prática</a
+							><a
+								href="/productdesign/design-systems-os-fundamentos-do-design-em-escala-thestarter"
+								class="link-footer"
+								>Design Systems</a
+							><a href="/design-systems-implementacao-em-escala-thestarter" class="link-footer"
+								>Design Systems à escala</a
+							><a
+								href="/design-systems-construcao-documentacao-e-implementacao-thestarter"
+								class="link-footer"
+								>Construção de Design Systems</a
+							><a
+								href="/design-ops-como-montar-operacoes-e-processos-de-design-thestarter"
+								class="link-footer"
+								>DesignOps</a
+							><a href="/uxresearch/ux-strategy-thestarter" class="link-footer">Strategic Design</a
+							><a
+								href="/ux-leadership-maturidade-processos-e-lideranca-de-equipas-de-design-thestarter"
+								class="link-footer"
+								>UX&nbsp;Design Leadership</a
+							><a href="/uxdesign/acessibilidade-para-ux-design-thestarter" class="link-footer"
+								>Acessibilidade para UX&nbsp;Design</a
+							><a href="/designportfolio/english-for-ux-design-thestarter-completo" class="link-footer"
+								>English for UX&nbsp;Design</a
+							><a href="/productdesign/product-design-thestarter" class="link-footer">Product Design</a
+							><a href="/productdesign/product-strategy-management-thestarter" class="link-footer"
+								>Gestão e Estratégia de Produtos</a
+							>
+						</div>
+					</div>
+					<div class="footer-column">
+						<div class="ebook-texto-white bold">Masterclasses</div>
+						<div class="margin-25px margin-xs">
+							<a href="/design-e-negocio-valor-do-design-em-ambiente-corporativo" class="link-footer"
+								>Valor do Design no Negócio</a
+							><a
+								href="/productdesign/handoff-conducao-de-handoffs-saudaveis-e-otimizados-thestarter"
+								class="link-footer"
+								>Handoffs otimizados</a
+							><a href="/productdesign/documentacao-de-design-systems-thestarter" class="link-footer"
+								>Documentação de Design Systems</a
+							>
+						</div>
+					</div>
+					<div class="footer-column">
+						<div class="ebook-texto-white bold">Trilhas</div>
+						<div class="margin-25px margin-xs">
+							<a href="/trilhas-carreira-thestarter" class="link-footer">Fundamentos</a
+							><a href="/trilhas-carreira-thestarter" class="link-footer">Pesquisa e Produto</a
+							><a href="/trilhas-carreira-thestarter" class="link-footer">Negócio e Organizações</a
+							><a href="/trilhas-carreira-thestarter" class="link-footer">Design Systems e Operações</a>
+						</div>
+						<div class="ebook-texto-white bold">Webinars Carreira</div>
+						<div class="margin-25px margin-xs">
+							<a
+								href="https://youtube.com/playlist?list=PLi0Qj04WdVBEJEBEYn3T_FROLdZnh28X_"
+								class="link-footer"
+								>UX&nbsp;Design</a
+							><a
+								href="https://youtube.com/playlist?list=PLi0Qj04WdVBH-WJAOALcVIjIfO60i0HOs"
+								class="link-footer"
+								>UX&nbsp;Research</a
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="politicas">
+					<a href="/politica-de-privacidade" class="link-footer margin-right">Política de privacidade</a
+					><a href="/politica-de-reembolso" class="link-footer margin-right">Política de reembolso</a
+					><a href="/guia-de-reembolso-pela-empresa" class="link-footer">Guia de reembolso pela empresa</a>
+				</div>
+				<div class="politicas left"><p class="thestarter-id">© 2023 TheStarter, Lda</p></div>
+			</div>
+		</div>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"
+		></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/api.js"></script>
+	</body>
+</html>

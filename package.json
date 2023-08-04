@@ -1,6 +1,6 @@
 {
 	"name": "the-starter",
-	"version": "0.9.9",
+	"version": "1.0.1",
 	"description": "Serviço de checkout The Starter",
 	"main": "index.ts",
 	"scripts": {
