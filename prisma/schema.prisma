@@ -41,6 +41,7 @@ model Invoice {
   customer    Customer
   product     Product
   createdAt   DateTime     @default(now())
+  checkoutUrl String?
   chargeData  ChargeData?
   paymentData PaymentData?
   callbacks   Callback[]

@@ -34,10 +34,12 @@ export default async function chargeInvoice(req: Request, res: Response): Promis
 			console.log(chargeResult)
 			if (!chargeResult) throw new Error(Errors.INVOICE_CHARGE_FAILED)
 
-			// TODO: Pegar a resposta da cobrança criada e ver qual é próximo passo
-			await WePayService.createCreditCard(invoice)
+			const checkoutUrl = await WePayService.createCreditCard(invoice)
+			await InvoiceRepository.saveCheckoutUrl(invoice.id, checkoutUrl)
+
 			result = {
 				success: true,
+				checkoutUrl,
 			}
 		}
 
@@ -46,12 +48,12 @@ export default async function chargeInvoice(req: Request, res: Response): Promis
 			chargeResult = await InvoiceRepository.setChargeData(invoiceId, chargeData)
 			if (!chargeResult) throw new Error(Errors.INVOICE_CHARGE_FAILED)
 
-			// TODO: Pegar a resposta da cobrança criada e ver qual é próximo passo
-			await WePayService.createPix(invoice)
+			const checkoutUrl = await WePayService.createPix(invoice)
+			await InvoiceRepository.saveCheckoutUrl(invoice.id, checkoutUrl)
 
 			result = {
-				qrCode: MockData.qrCode,
-				copyPaste: MockData.pixCopyPaste,
+				success: true,
+				checkoutUrl,
 			}
 		}
 	} catch (error: unknown) {

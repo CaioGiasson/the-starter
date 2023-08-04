@@ -5,15 +5,16 @@ import Formatter from '../../common/Formatter'
 
 const SELF_URL = process.env.SELF_URL
 
-const BASE_URL = process.env.WEPAY_URL || ''
+const BASE_URL = process.env.WEPAY_API_URL || ''
 const MERCHANT_ID = process.env.WEPAY_MERCHANT_ID || ''
 const MERCHANT_NAME = process.env.MERCHANT_NAME || ''
 const MERCHANT_DOCUMENT = process.env.MERCHANT_DOCUMENT || ''
 const MERCHANT_SUPPORT_CHANNEL = process.env.MERCHANT_SUPPORT_CHANNEL || ''
 const WEPAY_API_KEY = process.env.WEPAY_API_KEY || ''
+const WEPAY_CHECKOUT_URL = process.env.WEPAY_CHECKOUT_URL || ''
 
 export default class WePayService {
-	static async createPix(invoice: Invoice): Promise<void> {
+	static async createPix(invoice: Invoice): Promise<string> {
 		const amountInCents = invoice.product.price * 100,
 			webhook = SELF_URL + `/webhook/PIX/${invoice.id}`,
 			payload = {
@@ -51,15 +52,14 @@ export default class WePayService {
 			body: JSON.stringify(payload),
 		})
 
-		let result = {}
-		try {
-			result = await response.json()
-		} catch (e) {}
+		let result = await response.json()
 
 		await RequestRepository.update({ id: request.id, status: response.status, response: result })
+
+		return WEPAY_CHECKOUT_URL + result?.key
 	}
 
-	static async createCreditCard(invoice: Invoice): Promise<void> {
+	static async createCreditCard(invoice: Invoice): Promise<string> {
 		const amountInCents = invoice.product.price * 100,
 			webhook = SELF_URL + `/webhook/CREDIT_CARD/${invoice.id}`,
 			payload = {
@@ -108,11 +108,10 @@ export default class WePayService {
 			body: JSON.stringify(payload),
 		})
 
-		let result = {}
-		try {
-			result = await response.json()
-		} catch (e) {}
+		let result = await response.json()
 
 		await RequestRepository.update({ id: request.id, status: response.status, response: result })
+
+		return WEPAY_CHECKOUT_URL + result?.key
 	}
 }

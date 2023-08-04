@@ -73,4 +73,17 @@ export default class InvoiceRepository {
 		}
 		return false
 	}
+
+	static async saveCheckoutUrl(id: string, checkoutUrl: string): Promise<void> {
+		try {
+			await prisma.invoice.update({
+				where: { id },
+				data: {
+					checkoutUrl,
+				},
+			})
+		} catch (error: unknown) {
+			ErrorManager.log(error as Error)
+		}
+	}
 }
