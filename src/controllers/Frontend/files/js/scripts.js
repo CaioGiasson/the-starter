@@ -98,7 +98,6 @@ function validateProduct(product) {
 }
 
 function validateCustomer(customer) {
-	console.log(customer)
 	if (!customer.name || !customer.document || !customer.email) return false
 	if (customer.name.length < 1) return false
 	if (!/[a-zA-Z'\-]{1,}([ ][a-zA-Z'\-])+/.test(customer.name)) return false

@@ -18,20 +18,14 @@ export default async function chargeInvoice(req: Request, res: Response): Promis
 			invoice = await InvoiceRepository.get(invoiceId)
 		if (!invoice) throw new Error(Errors.INVOICE_NOT_FOUND)
 
-		console.log(`\n\n`)
-		console.log(invoice)
-
 		const { pix } = req.body,
 			isPixCharge = pix === true,
 			isCreditCardCharge = !isPixCharge
-
-		console.log({ isCreditCardCharge })
 
 		let chargeResult = null
 		if (isCreditCardCharge) {
 			const chargeData = { method: 'CREDIT_CARD' as PaymentMethod, amount: invoice.product.price }
 			chargeResult = await InvoiceRepository.setChargeData(invoiceId, chargeData)
-			console.log(chargeResult)
 			if (!chargeResult) throw new Error(Errors.INVOICE_CHARGE_FAILED)
 
 			const checkoutUrl = await WePayService.createCreditCard(invoice)
