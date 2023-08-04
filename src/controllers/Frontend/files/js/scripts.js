@@ -3,7 +3,7 @@ window.onload = function () {
 	loadProductData()
 }
 
-async function loadProductData() {
+function getProductFromURL() {
 	const urlParams = new URLSearchParams(window.location.search)
 
 	// There is no centralized product database on the company
@@ -13,6 +13,28 @@ async function loadProductData() {
 		name: '' + urlParams.get('product'),
 		price: parseFloat(urlParams.get('price')),
 	}
+	const isValidProduct = validateProduct(product)
+
+	if (isValidProduct) {
+		saveProductOnLocalStorage(product)
+		document.location = window.location.origin + window.location.pathname
+		return product
+	}
+
+	return null
+}
+
+function saveProductOnLocalStorage(product) {
+	localStorage.setItem('product', JSON.stringify(product))
+}
+function getProductFromLocalStorage() {
+	const product = JSON.parse(localStorage.getItem('product'))
+	const isValidProduct = validateProduct(product)
+	return isValidProduct ? product : null
+}
+
+async function loadProductData() {
+	const product = getProductFromURL() || getProductFromLocalStorage()
 
 	// Loading illusion
 	await delayMs(1000)
@@ -23,6 +45,8 @@ async function loadProductData() {
 	renderProduct(product)
 	showCart()
 }
+
+async function saveProduct() {}
 
 async function doCheckout() {
 	const customer = {
@@ -63,6 +87,7 @@ function validatePayentMethod() {
 }
 
 function validateProduct(product) {
+	if (product === null || product === undefined) return false
 	if (!product.sku || !product.name || !product.price) return false
 	if (isNaN(product.price)) return false
 	if (product.price <= 0) return false
