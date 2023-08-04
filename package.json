@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "test",
 		"dev": "npx prisma generate && npx nodemon",
-		"build": "rimraf ./build && tsc",
+		"build": "rimraf ./build && tsc && cp -R src/controllers/Frontend/files/ build/controllers/Frontend/files/",
 		"check": "prettier --write . && eslint . --ext .ts",
 		"start": "npm run build && node build/index.js",
 		"prepare": "husky install"
