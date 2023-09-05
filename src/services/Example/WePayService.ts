@@ -54,6 +54,13 @@ export default class WePayService {
 
 		let result = await response.json()
 
+		console.log(`\n\n\n\n`)
+		console.log({ payload })
+		console.log(`\n\n`)
+		console.log(response.status)
+		console.log(result)
+		console.log(`\n\n\n\n`)
+
 		await RequestRepository.update({ id: request.id, status: response.status, response: result })
 
 		return WEPAY_CHECKOUT_URL + result?.key
